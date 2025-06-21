@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Segurança Mulher</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .background {
+      background-image: url('https://i.imgur.com/vkG3LFM.png');
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      position: relative;
+    }
+
+    .icone {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(97, 63, 117, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .top-left { top: 20px; left: 20px; }
+    .top-right { top: 20px; right: 20px; display: flex; gap: 10px; }
+    .bottom-right { bottom: 100px; right: 20px; }
+
+    .popup {
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background: white;
+      color: #613f75;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 10;
+    }
+
+    .parceiros {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      border-top: 2px solid #613f75;
+    }
+
+    .ads {
+      width: 45%;
+      background: #f0e7ef;
+      border: 1px solid #d1a0c3;
+      border-radius: 8px;
+      text-align: center;
+      padding: 8px;
+      font-size: 0.85rem;
+      color: #613f75;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="background" onclick="abrirRota()">
+    <!-- Ícones nos cantos -->
+    <div class="icone top-left">≡</div>
+
+    <div class="top-right">
+      <div class="icone" onclick="mostrarPopup('bluetooth')">📶</div>
+      <div class="icone" onclick="mostrarPopup('bateria')">🔋</div>
+    </div>
+
+    <div class="icone bottom-right" onclick="abrirRota()">📍</div>
+
+    <!-- Pop-ups -->
+    <div id="popup-bateria" class="popup">🔋 Bateria abaixo de 20%!</div>
+    <div id="popup-bluetooth" class="popup">📶 Pulseira conectada via Bluetooth</div>
+
+    <!-- Parceiros -->
+    <div class="parceiros">
+      <div class="ads" onclick="window.open('https://maps.google.com?q=Farmácia Saúde')">
+        💊 Farma Saúde<br><small>Rua Central, 123</small>
+      </div>
+      <div class="ads" onclick="window.open('https://maps.google.com?q=ONG+Amparo+Mulher')">
+        🛡️ ONG Amparo Mulher<br><small>Apoio jurídico e psicológico</small>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function abrirRota() {
+      const destino = encodeURIComponent("Delegacia da Mulher, São Paulo");
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${destino}`, '_blank');
+    }
+
+    function mostrarPopup(tipo) {
+      document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+      const popup = document.getElementById('popup-' + tipo);
+      if (popup) {
+        popup.style.display = 'block';
+        setTimeout(() => popup.style.display = 'none', 3000);
+      }
+    }
+  </script>
+</body>
+</html>
